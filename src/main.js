@@ -13,6 +13,7 @@ const settings = {
   width: window.innerWidth,
   height: window.innerHeight,
   ratio: window.innerWidth / window.innerHeight,
+  isMobile: window.matchMedia("only screen and (max-width: 768px)").matches,
 };
 
 console.log(settings);
@@ -25,6 +26,10 @@ const camera = new THREE.PerspectiveCamera(75, settings.ratio, 1, 1000);
 camera.position.set(0, 0, 10);
 camera.lookAt(new THREE.Vector3());
 camera.updateProjectionMatrix();
+
+if (settings.isMobile) {
+  camera.position.z = 15;
+}
 
 const controls = new OrbitControls(camera, canvas);
 
